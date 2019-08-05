@@ -53,6 +53,9 @@ def process(msg):
 
 if __name__ == "__main__":
     sock = bind_udp()
-    while True:
-        data, addr = sock.recvfrom(1024)
-        process(data.decode("utf-8"))
+    try:
+        while True:
+            data, addr = sock.recvfrom(1024)
+            process(data.decode("utf-8"))
+    except (KeyboardInterrupt, SystemExit):
+        pass

@@ -1,8 +1,9 @@
-FROM python:3.5.1-alpine
+FROM python:3.7-alpine
 
-WORKDIR /home
+RUN apk add --no-cache tini
 
-COPY mockdog.py /home/mockdog.py
+COPY mockdog.py mockdog.py
 
 EXPOSE 8125/UDP
-ENTRYPOINT ["python", "mockdog.py"]
+ENTRYPOINT ["tini", "--"]
+CMD ["python", "mockdog.py"]
